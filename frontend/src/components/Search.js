@@ -4,22 +4,17 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 const Search = () => {
     return (
         <Container>
-          <Row>
-            <Col>
-              <Form>
-                <Form.Row>
-                  <Col>
-                    <Form.Control placeholder="Search for new image..."/>
-                  </Col>
-                  <Col>
-                    <Button variant="primary" type="submit">Search</Button>
-                  </Col>
-                </Form.Row>
-              </Form>
-            </Col>
-          </Row>
+            <Form>
+              <Row>
+                <Col>
+                  <Form.Control placeholder="Search for new image..."/>
+                </Col>
+                <Col>
+                   <Button variant='primary' type='submit'>Search</Button>
+                </Col>
+              </Row>
+            </Form>
         </Container>
     );
 };
-
 export default Search;
