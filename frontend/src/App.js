@@ -20,8 +20,7 @@ const App = () => {
             console.log(err);
         })
     setWord('');
-  }
-
+  };
 
   return (
     <div className="App">
