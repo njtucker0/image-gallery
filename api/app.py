@@ -1,4 +1,5 @@
 from flask import Flask, request
+from flask_cors import CORS
 import requests
 import os
 from dotenv import load_dotenv
@@ -14,6 +15,7 @@ if not UNSPLASH_KEY:
                            "and insert the UNSPLASH_KEY")
 
 app = Flask(__name__)
+CORS(app)
 app.config["DEBUG"] = DEBUG
 @app.route('/new-image')
 def new_image():
