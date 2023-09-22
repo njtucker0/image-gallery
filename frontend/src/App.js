@@ -78,17 +78,18 @@ const App = () => {
             handleSubmit={handleSearchSubmit}
           />
           <Container className="mt-4">
-            {images.length ? <Row xs={1} md={2} lg={3}>
-              { images.map((image,i) => (
-                <Col key={i} className='pb-3'>
-                  <ImageCard
-                    image={image}
-                    deleteImage={handleDeleteImage}
-                    saveImage={handleSaveImage}
-                   />
-                </Col>
-              ))}
-            </Row> : <Welcome/>
+            {images.length ?
+              <Row xs={1} md={2} lg={3}>
+                  { images.map((image,i) => (
+                    <Col key={i} className='pb-3'>
+                      <ImageCard
+                        image={image}
+                        deleteImage={handleDeleteImage}
+                        saveImage={handleSaveImage}
+                       />
+                    </Col>
+                  ))}
+              </Row> : <Welcome/>
             }
           </Container>
       </div>
