@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import Search from './components/Search';
 import ImageCard from './components/ImageCard';
@@ -6,6 +7,7 @@ import Welcome from './components/Welcome';
 import Spinner from './components/Spinner';
 import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5050'
@@ -21,8 +23,10 @@ const App = () => {
             const res = await axios.get(`${API_URL}/images`);
             setImages(res.data || []);
             setLoading(false);
+            toast.success('Saved Images Downloaded');
         } catch (error) {
             console.log(error);
+            toast.error(error.message);
         }
     }
     getSavedImages();
@@ -33,8 +37,10 @@ const App = () => {
     try {
         const res = await axios.get(`${API_URL}/new-image?query=${word}`);
         setImages([{ ...res.data, title: word }, ...images]);
+        toast.info(`New Image ${word.toUpperCase()} was found`);
     } catch (error) {
         console.log(error);
+        toast.error(error.message);
     }
     setWord('');
   };
@@ -43,10 +49,12 @@ const App = () => {
     try {
         const res = await axios.delete(`${API_URL}/images/${id}`);
         if (res.data?.deleted_id) {
+            toast.success(`Image ${images.find((i) => i.id === id).title.toUpperCase()} was deleted`)
             setImages(images.filter((image) => image.id !== id));
         }
     } catch (error) {
         console.log(error);
+        toast.error(error.message);
     }
   };
 
@@ -61,9 +69,11 @@ const App = () => {
                     image.id === id ? {...image, saved: true}: image
                 )
             );
+            toast.success(`Image ${imageToBeSaved.title.toUpperCase()} was saved`);
         }
     } catch (error) {
         console.log(error);
+        toast.error(error.message);
     }
   };
 
@@ -94,6 +104,7 @@ const App = () => {
           </Container>
       </div>
       }
+      <ToastContainer position="bottom-right" />
     </div>
   );
 };
